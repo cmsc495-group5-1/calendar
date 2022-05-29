@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+  backend:
+    image: nginx
+    volumes:
+      - $PWD/example-backend:/usr/share/nginx/html:ro
+  frontend:
+    image: nginx
+    volumes:
+      - $PWD/example-frontend:/usr/share/nginx/html:ro
+volumes:
+  caddy_data:
+  caddy_config:
+
