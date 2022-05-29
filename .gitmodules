@@ -1,0 +1,3 @@
+[submodule "calendar-frontend"]
+	path = calendar-frontend
+	url = git@github.com:cmsc495-group5-1/calendar-frontend.git
